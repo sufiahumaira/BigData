@@ -15,17 +15,40 @@ st.set_page_config(
     layout="centered"
 )
 
-# Warna latar belakang biru (CSS)
+# ==========================
+# Sidebar: Pilih Warna Tema
+# ==========================
+st.sidebar.header("🎨 Pilihan Tema Warna")
+tema = st.sidebar.radio(
+    "Pilih warna latar belakang:",
+    ["Biru", "Pink", "Putih"]
+)
+
+# Warna latar berdasarkan pilihan
+if tema == "Biru":
+    bg_color = "#b3d9ff"
+    text_color = "#000000"
+    title_color = "#003366"
+elif tema == "Pink":
+    bg_color = "#ffccff"
+    text_color = "#000000"
+    title_color = "#660033"
+else:  # Putih
+    bg_color = "#ffffff"
+    text_color = "#000000"
+    title_color = "#003366"
+
+# Terapkan CSS dinamis
 st.markdown(
-    """
+    f"""
     <style>
-    .stApp {
-        background-color: #b3d9ff; /* biru muda */
-        color: #000000; /* teks hitam */
-    }
-    h1, h2, h3 {
-        color: #003366; /* biru tua untuk judul */
-    }
+    .stApp {{
+        background-color: {bg_color};
+        color: {text_color};
+    }}
+    h1, h2, h3 {{
+        color: {title_color};
+    }}
     </style>
     """,
     unsafe_allow_html=True
@@ -43,7 +66,7 @@ def load_models():
 yolo_model, classifier = load_models()
 
 # ==========================
-# Sidebar Menu
+# Sidebar Menu Navigasi
 # ==========================
 menu = st.sidebar.selectbox(
     "Navigasi:",
@@ -122,6 +145,6 @@ elif menu == "👩‍💻 Penyusun":
         **Universitas:** Universitas Syiah Kuala  
 
         ---
-        Terima kasih telah menggunakan aplikasi ini 💙  
+        Terima kasih telah mengujungi dashboard ini 💙  
         """
     )
